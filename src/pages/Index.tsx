@@ -36,16 +36,20 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
               onClick={scrollToContact}
-              className="btn-primary text-lg"
+              variant="premium"
+              size="lg"
+              className="text-lg px-10 py-6"
             >
               <Home className="mr-2 h-5 w-5" />
               Encontrar Meu Imóvel Ideal
             </Button>
             <Button 
-              variant="outline" 
+              variant="glass"
+              size="lg"
               onClick={scrollToContact}
-              className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 text-lg"
+              className="text-lg px-10 py-6"
             >
+              <Key className="mr-2 h-5 w-5" />
               Quero Vender Meu Imóvel
             </Button>
           </div>
@@ -81,11 +85,12 @@ const Index = () => {
           ].map((pillar, index) => (
             <Card 
               key={index}
-              className="p-8 text-center card-hover border-border/50 bg-card"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`p-8 text-center card-hover border-border/50 bg-card animate-fade-in animate-delay-${index + 1}00`}
             >
-              <div className="mb-6 flex justify-center">{pillar.icon}</div>
-              <h3 className="text-xl font-bold text-primary mb-4">{pillar.title}</h3>
+              <div className="mb-6 flex justify-center transform transition-transform duration-300 hover:scale-110 hover:rotate-6">
+                {pillar.icon}
+              </div>
+              <h3 className="text-2xl font-bold text-primary mb-4">{pillar.title}</h3>
               <p className="text-body">{pillar.description}</p>
             </Card>
           ))}
@@ -94,12 +99,13 @@ const Index = () => {
 
       {/* About Thay - Storytelling */}
       <section className="section-container">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-in">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="animate-fade-in relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl blur-3xl"></div>
             <img 
               src={thayProfile} 
               alt="Thay Carvas - Corretora de Imóveis" 
-              className="rounded-2xl shadow-2xl w-full max-w-md mx-auto"
+              className="relative rounded-2xl shadow-2xl w-full max-w-md mx-auto transform hover:scale-105 transition-transform duration-500"
             />
           </div>
           
@@ -135,7 +141,12 @@ const Index = () => {
               </div>
             </div>
 
-            <Button onClick={scrollToContact} className="btn-primary mt-6">
+            <Button 
+              onClick={scrollToContact} 
+              variant="premium"
+              size="lg"
+              className="mt-6"
+            >
               Vamos Dar o Primeiro Passo Juntos
             </Button>
           </div>
@@ -168,15 +179,19 @@ const Index = () => {
           ].map((service, index) => (
             <Card 
               key={index}
-              className="p-8 card-hover border-border/50 bg-card"
+              className={`p-8 card-hover border-border/50 bg-card group animate-slide-up animate-delay-${index + 1}00`}
             >
-              <div className="mb-4 text-accent">{service.icon}</div>
-              <h3 className="text-xl font-bold text-primary mb-4">{service.title}</h3>
+              <div className="mb-6 text-accent transform transition-all duration-300 group-hover:scale-125 group-hover:rotate-12">
+                {service.icon}
+              </div>
+              <h3 className="text-2xl font-bold text-primary mb-4 group-hover:text-accent transition-colors duration-300">
+                {service.title}
+              </h3>
               <p className="text-body mb-6">{service.description}</p>
               <Button 
                 variant="outline" 
                 onClick={scrollToContact}
-                className="w-full border-primary/20 hover:bg-primary/5"
+                className="w-full border-primary/30 hover:bg-primary hover:text-primary-foreground hover:border-primary"
               >
                 Saber Mais
               </Button>
@@ -202,17 +217,19 @@ const Index = () => {
           ].map((property, index) => (
             <div 
               key={index}
-              className="group relative overflow-hidden rounded-2xl card-hover cursor-pointer"
+              className={`group relative overflow-hidden rounded-2xl card-hover cursor-pointer animate-fade-in animate-delay-${index + 1}00`}
             >
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/30 to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
               <img 
                 src={property.image} 
                 alt={property.title}
-                className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-125"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                <div className="text-white">
-                  <h3 className="text-xl font-bold mb-2">{property.title}</h3>
-                  <p className="text-sm">{property.type}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-8 z-20">
+                <div className="text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-2xl font-bold mb-2">{property.title}</h3>
+                  <p className="text-sm opacity-90 mb-4">{property.type}</p>
+                  <div className="w-12 h-1 bg-accent rounded-full"></div>
                 </div>
               </div>
             </div>
@@ -239,18 +256,24 @@ const Index = () => {
               text: "Investimento certeiro! A análise de mercado que a Thay fez foi fundamental. Hoje meu imóvel já valorizou 15% e estou extremamente satisfeito."
             }
           ].map((testimonial, index) => (
-            <Card key={index} className="p-8 border-border/50 bg-card">
+            <Card 
+              key={index} 
+              className={`p-8 border-border/50 bg-card card-hover animate-slide-up animate-delay-${index + 1}00`}
+            >
               <div className="flex items-start gap-4">
-                <div className="h-12 w-12 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
-                  <span className="text-accent font-bold text-lg">
+                <div className="h-14 w-14 rounded-full bg-gradient-to-br from-accent/30 to-primary/30 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span className="text-accent font-bold text-xl">
                     {testimonial.name.charAt(0)}
                   </span>
                 </div>
                 <div>
-                  <p className="text-body italic mb-4">"{testimonial.text}"</p>
+                  <p className="text-body italic mb-4 text-lg leading-relaxed">"{testimonial.text}"</p>
                   <div>
-                    <p className="font-semibold text-primary">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                    <p className="font-bold text-primary text-lg">{testimonial.name}</p>
+                    <p className="text-sm text-muted-foreground flex items-center gap-1">
+                      <MapPin className="h-3 w-3" />
+                      {testimonial.location}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -260,60 +283,71 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="section-container bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+      <section id="contact" className="section-container gradient-overlay text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-glow rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
             Pronto Para Transformar Seu Sonho em Realidade?
           </h2>
-          <p className="text-xl mb-8 text-primary-foreground/90">
+          <p className="text-xl md:text-2xl mb-12 text-primary-foreground/90 leading-relaxed animate-fade-in animate-delay-100">
             Clique abaixo e vamos conversar sobre o que você precisa e o que realmente faz sentido para você.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-fade-in animate-delay-200">
             <a 
               href="https://wa.me/5521999999999?text=Olá%20Thay,%20gostaria%20de%20conversar%20sobre%20imóveis"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary bg-white text-primary hover:bg-white/90 inline-flex items-center justify-center"
+              className="group bg-white text-primary px-10 py-5 rounded-xl font-bold text-lg shadow-2xl hover:shadow-accent/50 transition-all duration-500 transform hover:scale-110 inline-flex items-center justify-center"
             >
-              <Send className="mr-2 h-5 w-5" />
-              WhatsApp
+              <Send className="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform duration-300" />
+              Falar no WhatsApp
             </a>
             <a 
               href="https://instagram.com/carvasconsultoria"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary bg-accent hover:bg-accent/90 inline-flex items-center justify-center"
+              className="group bg-accent text-accent-foreground px-10 py-5 rounded-xl font-bold text-lg shadow-2xl hover:shadow-accent/50 transition-all duration-500 transform hover:scale-110 inline-flex items-center justify-center"
             >
-              <Instagram className="mr-2 h-5 w-5" />
-              Instagram
+              <Instagram className="mr-3 h-6 w-6 group-hover:scale-125 transition-transform duration-300" />
+              Seguir no Instagram
             </a>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-6 text-left bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-            <div className="flex items-center gap-3">
-              <Phone className="h-6 w-6 text-accent" />
+          <div className="grid sm:grid-cols-3 gap-6 text-left glass-effect rounded-2xl p-10 animate-fade-in animate-delay-300">
+            <div className="flex items-center gap-4 group cursor-pointer">
+              <div className="p-3 rounded-full bg-accent/20 group-hover:bg-accent/30 transition-colors duration-300">
+                <Phone className="h-6 w-6 text-accent" />
+              </div>
               <div>
-                <p className="text-sm text-primary-foreground/70">Telefone</p>
-                <a href="tel:+5521999999999" className="font-semibold hover:text-accent transition-colors">
+                <p className="text-sm text-primary-foreground/70 mb-1">Telefone</p>
+                <a href="tel:+5521999999999" className="font-bold text-lg hover:text-accent transition-colors duration-300">
                   (21) 99999-9999
                 </a>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <Mail className="h-6 w-6 text-accent" />
+            <div className="flex items-center gap-4 group cursor-pointer">
+              <div className="p-3 rounded-full bg-accent/20 group-hover:bg-accent/30 transition-colors duration-300">
+                <Mail className="h-6 w-6 text-accent" />
+              </div>
               <div>
-                <p className="text-sm text-primary-foreground/70">Email</p>
-                <a href="mailto:contato@thaycarvas.com.br" className="font-semibold hover:text-accent transition-colors">
+                <p className="text-sm text-primary-foreground/70 mb-1">Email</p>
+                <a href="mailto:contato@thaycarvas.com.br" className="font-bold text-lg hover:text-accent transition-colors duration-300 break-all">
                   contato@thaycarvas.com.br
                 </a>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <MapPin className="h-6 w-6 text-accent" />
+            <div className="flex items-center gap-4 group">
+              <div className="p-3 rounded-full bg-accent/20 group-hover:bg-accent/30 transition-colors duration-300">
+                <MapPin className="h-6 w-6 text-accent" />
+              </div>
               <div>
-                <p className="text-sm text-primary-foreground/70">Localização</p>
-                <p className="font-semibold">Rio de Janeiro, RJ</p>
+                <p className="text-sm text-primary-foreground/70 mb-1">Localização</p>
+                <p className="font-bold text-lg">Rio de Janeiro, RJ</p>
               </div>
             </div>
           </div>
