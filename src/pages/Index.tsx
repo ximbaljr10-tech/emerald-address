@@ -1,6 +1,7 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Home, TrendingUp, Heart, Building2, Key, LineChart, Instagram, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Home, TrendingUp, Heart, Building2, Key, LineChart, Instagram, MessageCircle, Sparkles, Award, Target } from "lucide-react";
 import heroImage from "@/assets/hero-building.jpg";
 import thayProfile from "@/assets/thay-profile.png";
 import portfolio1 from "@/assets/portfolio-1.jpg";
@@ -11,6 +12,32 @@ const Index = () => {
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Intersection Observer para ativar animações no mobile e desktop
+  React.useEffect(() => {
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -10% 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          // Não desmarcar para manter o estado
+        }
+      });
+    }, observerOptions);
+
+    // Observar todos os elementos com animações
+    const animatedElements = document.querySelectorAll(
+      '.animate-fade-in, .animate-slide-up, .card-hover, .scroll-reveal'
+    );
+    
+    animatedElements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -153,13 +180,23 @@ const Index = () => {
           </div>
           
           <div className="space-y-5 sm:space-y-6 animate-slide-up order-1 lg:order-2 px-2">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4">
+              <Sparkles className="h-4 w-4 text-accent" />
+              <span className="text-sm font-semibold text-accent">Conectando Saúde, Soluções e Bem-Estar</span>
+            </div>
+            
             <h2 className="heading-section">Prazer, sou a Thay Carvas 👋</h2>
-            <p className="text-body text-base sm:text-lg">
-              Corretora de imóveis de alto padrão, representante de soluções estratégicas e apaixonada por transformar realidades.
+            
+            <p className="text-body text-base sm:text-lg leading-relaxed">
+              Muito prazer! Sou corretora de imóveis de alto padrão, <span className="text-accent font-semibold">representante de soluções cirúrgicas</span> e instrumentadora apaixonada por transformar realidades.
             </p>
-            <p className="text-body text-base sm:text-lg">
-              Me move aquilo que importa de verdade: <strong className="text-primary font-bold">cuidar de pessoas, facilitar escolhas e realizar sonhos.</strong>
-            </p>
+            
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 border-l-4 border-accent">
+              <Heart className="h-5 w-5 text-accent flex-shrink-0 mt-1" />
+              <p className="text-body text-base sm:text-lg">
+                Me movo por aquilo que importa de verdade: <strong className="text-primary font-bold">cuidar de pessoas, facilitar escolhas e realizar sonhos.</strong>
+              </p>
+            </div>
             
             <div className="space-y-4 sm:space-y-5 pl-4 sm:pl-6 border-l-4 border-accent mt-6 sm:mt-8">
               <div className="flex items-start gap-3 sm:gap-4 group">
@@ -175,9 +212,24 @@ const Index = () => {
                 <div className="p-2 rounded-xl bg-accent/10 group-hover:bg-accent/20 transition-colors duration-300">
                   <Building2 className="h-5 w-5 sm:h-6 sm:w-6 text-accent flex-shrink-0" />
                 </div>
-                <p className="text-body text-sm sm:text-base">
-                  <strong className="block mb-1">Especialidade:</strong> Imóveis de alto padrão no Rio de Janeiro e região. Atendimento humanizado e consultivo.
-                </p>
+                <div>
+                  <p className="text-body text-sm sm:text-base">
+                    <strong className="block mb-1 text-primary">No Mercado Imobiliário</strong>
+                    Imóveis de alto padrão no Rio e região • Atendimento humanizado e consultivo • Negociação com segurança, clareza e zero enrolação
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3 sm:gap-4 group">
+                <div className="p-2 rounded-xl bg-accent/10 group-hover:bg-accent/20 transition-colors duration-300">
+                  <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-accent flex-shrink-0" />
+                </div>
+                <div>
+                  <p className="text-body text-sm sm:text-base">
+                    <strong className="block mb-1 text-primary">Na Área da Saúde</strong>
+                    Conecto médicos às tecnologias mais inovadoras em cirurgias de coluna, neurocirurgia e ortopedia. Atuo como instrumentadora cirúrgica garantindo excelência no centro cirúrgico.
+                  </p>
+                </div>
               </div>
               
               <div className="flex items-start gap-3 sm:gap-4 group">
@@ -185,7 +237,8 @@ const Index = () => {
                   <Key className="h-5 w-5 sm:h-6 sm:w-6 text-accent flex-shrink-0" />
                 </div>
                 <p className="text-body text-sm sm:text-base">
-                  Acompanhamento completo desde a escolha até a chave — e depois dela também!
+                  <strong className="block mb-1 text-primary">Comprometimento Real</strong>
+                  Acompanhamento completo até as chaves (e depois delas também!)
                 </p>
               </div>
             </div>
@@ -412,133 +465,131 @@ const Index = () => {
       </section>
 
       {/* CTA Section - Ultra Modern 2026 Design */}
-      <section id="contact" className="cta-modern-section relative overflow-hidden">
-        {/* Advanced 3D mesh gradient background */}
-        <div className="absolute inset-0 mesh-gradient-bg"></div>
+      <section id="contact" className="cta-futuristic-section relative overflow-hidden">
+        {/* Liquid gradient background with neural network effect */}
+        <div className="absolute inset-0 neural-mesh-bg"></div>
         
-        {/* Floating organic shapes */}
+        {/* Holographic floating particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="floating-orb floating-orb-1"></div>
-          <div className="floating-orb floating-orb-2"></div>
-          <div className="floating-orb floating-orb-3"></div>
-          <div className="floating-orb floating-orb-4"></div>
+          <div className="hologram-particle hologram-particle-1"></div>
+          <div className="hologram-particle hologram-particle-2"></div>
+          <div className="hologram-particle hologram-particle-3"></div>
+          <div className="hologram-particle hologram-particle-4"></div>
+          <div className="hologram-particle hologram-particle-5"></div>
         </div>
         
-        {/* Animated grid lines */}
-        <div className="absolute inset-0 grid-overlay opacity-20"></div>
-        
-        {/* Gradient waves */}
-        <div className="absolute inset-0">
-          <svg className="absolute bottom-0 w-full h-64 opacity-30" preserveAspectRatio="none" viewBox="0 0 1440 320">
-            <path fill="url(#wave-gradient)" fillOpacity="1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-              <animate attributeName="d" dur="10s" repeatCount="indefinite"
-                values="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
-                M0,160L48,144C96,128,192,96,288,90.7C384,85,480,107,576,128C672,149,768,171,864,165.3C960,160,1056,128,1152,122.7C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
-                M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/>
-            </path>
-            <defs>
-              <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style={{stopColor: 'rgba(255,255,255,0.1)', stopOpacity: 1}} />
-                <stop offset="50%" style={{stopColor: 'rgba(234,179,8,0.2)', stopOpacity: 1}} />
-                <stop offset="100%" style={{stopColor: 'rgba(255,255,255,0.1)', stopOpacity: 1}} />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
+        {/* Glass morphism grid */}
+        <div className="absolute inset-0 glass-grid-overlay"></div>
         
         <div className="section-container relative z-10">
-          {/* Hero text with modern typography */}
-          <div className="text-center mb-12 lg:mb-16">
-            <div className="inline-block mb-6 px-6 py-2 rounded-full glass-tag animate-fade-in">
-              <span className="text-sm font-semibold text-white/90 tracking-wider uppercase">✨ Realize Seu Sonho</span>
+          {/* Magnetic hero text */}
+          <div className="text-center mb-16 lg:mb-20 space-y-8">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full magnetic-tag animate-fade-in backdrop-blur-2xl">
+              <Sparkles className="h-5 w-5 text-accent animate-pulse" />
+              <span className="text-sm font-bold text-white tracking-widest uppercase">Sua Jornada Começa Aqui</span>
             </div>
             
-            <h2 className="heading-cta mb-6 animate-fade-in animate-delay-100">
-              Pronto Para Transformar{" "}
-              <span className="block mt-2 gradient-text-accent">Seu Sonho em Realidade?</span>
+            <h2 className="heading-magnetic mb-6 animate-fade-in animate-delay-100">
+              Transforme Seu Sonho{" "}
+              <span className="block mt-2 holographic-text">em Endereço Real</span>
             </h2>
             
-            <p className="text-cta-description animate-fade-in animate-delay-200">
-              Clique abaixo e vamos conversar sobre o que você precisa<br className="hidden md:block" />
+            <p className="text-futuristic-description animate-fade-in animate-delay-200">
+              Vamos conversar sobre o que você precisa<br className="hidden md:block" />
               {" "}e o que realmente faz sentido para você.
             </p>
           </div>
           
-          {/* Modern CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-5 justify-center mb-16 lg:mb-20 animate-fade-in animate-delay-300">
+          {/* Holographic action cards */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16 lg:mb-20 animate-fade-in animate-delay-300">
+            {/* WhatsApp Card */}
             <a 
               href="https://wa.me/5521999999999?text=Olá%20Thay,%20gostaria%20de%20conversar%20sobre%20imóveis"
               target="_blank"
               rel="noopener noreferrer"
-              className="cta-button cta-button-primary group"
+              className="holographic-card holographic-card-primary group relative"
             >
-              <div className="cta-button-glow"></div>
-              <Send className="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform duration-500 relative z-10" />
-              <span className="relative z-10">Falar no WhatsApp</span>
-              <div className="cta-button-shine"></div>
+              <div className="holographic-border"></div>
+              <div className="holographic-glow"></div>
+              
+              <div className="relative z-10 p-8 flex flex-col items-center text-center space-y-4">
+                <div className="icon-magnetic-wrapper">
+                  <div className="icon-glow-ring"></div>
+                  <MessageCircle className="h-12 w-12 text-white relative z-10" />
+                </div>
+                
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-2">WhatsApp</h3>
+                  <p className="text-white/80 text-sm mb-4">Resposta rápida e direta</p>
+                  
+                  <div className="inline-flex items-center gap-2 text-accent font-semibold group-hover:gap-3 transition-all duration-300">
+                    <span>Iniciar Conversa</span>
+                    <Target className="h-4 w-4 group-hover:rotate-90 transition-transform duration-500" />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="holographic-shine"></div>
             </a>
             
+            {/* Instagram Card */}
             <a 
               href="https://instagram.com/carvasconsultoria"
               target="_blank"
               rel="noopener noreferrer"
-              className="cta-button cta-button-secondary group"
+              className="holographic-card holographic-card-secondary group relative"
             >
-              <div className="cta-button-glow"></div>
-              <Instagram className="mr-3 h-6 w-6 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-500 relative z-10" />
-              <span className="relative z-10">Seguir no Instagram</span>
-              <div className="cta-button-shine"></div>
+              <div className="holographic-border"></div>
+              <div className="holographic-glow"></div>
+              
+              <div className="relative z-10 p-8 flex flex-col items-center text-center space-y-4">
+                <div className="icon-magnetic-wrapper">
+                  <div className="icon-glow-ring"></div>
+                  <Instagram className="h-12 w-12 text-white relative z-10" />
+                </div>
+                
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-2">Instagram</h3>
+                  <p className="text-white/80 text-sm mb-4">Conteúdos e inspirações</p>
+                  
+                  <div className="inline-flex items-center gap-2 text-accent font-semibold group-hover:gap-3 transition-all duration-300">
+                    <span>Seguir Agora</span>
+                    <Award className="h-4 w-4 group-hover:scale-125 transition-transform duration-500" />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="holographic-shine"></div>
             </a>
           </div>
 
-          {/* Ultra modern contact cards */}
-          <div className="max-w-6xl mx-auto animate-fade-in animate-delay-400">
-            <div className="grid md:grid-cols-3 gap-5 lg:gap-6">
-              {/* Phone Card */}
-              <div className="contact-card-modern group">
-                <div className="contact-card-inner">
-                  <div className="contact-icon-wrapper">
-                    <Phone className="h-6 w-6 text-accent" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="contact-label">Telefone</p>
-                    <a href="tel:+5521999999999" className="contact-value">
-                      (21) 99999-9999
-                    </a>
-                  </div>
-                </div>
-                <div className="contact-card-glow"></div>
-              </div>
-              
-              {/* Email Card */}
-              <div className="contact-card-modern group">
-                <div className="contact-card-inner">
-                  <div className="contact-icon-wrapper">
-                    <Mail className="h-6 w-6 text-accent" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="contact-label">Email</p>
-                    <a href="mailto:contato@thaycarvas.com.br" className="contact-value text-sm lg:text-base">
-                      contato@thaycarvas.com.br
-                    </a>
-                  </div>
-                </div>
-                <div className="contact-card-glow"></div>
-              </div>
-              
-              {/* Location Card */}
-              <div className="contact-card-modern group">
-                <div className="contact-card-inner">
-                  <div className="contact-icon-wrapper">
-                    <MapPin className="h-6 w-6 text-accent" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="contact-label">Localização</p>
-                    <p className="contact-value">Rio de Janeiro, RJ</p>
-                  </div>
-                </div>
-                <div className="contact-card-glow"></div>
-              </div>
+          {/* Minimal contact info strips */}
+          <div className="max-w-5xl mx-auto space-y-3 animate-fade-in animate-delay-400">
+            {/* Phone */}
+            <a 
+              href="tel:+5521999999999"
+              className="neo-contact-strip group"
+            >
+              <Phone className="h-5 w-5 text-accent" />
+              <span className="text-white/70 text-sm font-medium">Telefone</span>
+              <span className="text-white font-semibold group-hover:text-accent transition-colors">(21) 99999-9999</span>
+            </a>
+            
+            {/* Email */}
+            <a 
+              href="mailto:contato@thaycarvas.com.br"
+              className="neo-contact-strip group"
+            >
+              <Mail className="h-5 w-5 text-accent" />
+              <span className="text-white/70 text-sm font-medium">Email</span>
+              <span className="text-white font-semibold group-hover:text-accent transition-colors text-sm md:text-base">contato@thaycarvas.com.br</span>
+            </a>
+            
+            {/* Location */}
+            <div className="neo-contact-strip">
+              <MapPin className="h-5 w-5 text-accent" />
+              <span className="text-white/70 text-sm font-medium">Localização</span>
+              <span className="text-white font-semibold">Rio de Janeiro, RJ</span>
             </div>
           </div>
         </div>
@@ -576,7 +627,7 @@ const Index = () => {
                 className="group p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 hover:border-accent transition-all duration-500 hover:scale-110 hover:-translate-y-1"
                 aria-label="WhatsApp"
               >
-                <Send className="h-5 w-5 sm:h-6 sm:w-6 group-hover:rotate-12 transition-transform duration-500" />
+                <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform duration-500" />
               </a>
               <a 
                 href="mailto:contato@thaycarvas.com.br"
