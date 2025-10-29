@@ -110,84 +110,249 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "kern" 1;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Papel de parede sutil e elegante - SEM AMARELO */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.25;
+    background: 
+      radial-gradient(circle at 15% 25%, hsla(160, 50%, 45%, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 85% 75%, hsla(165, 45%, 50%, 0.06) 0%, transparent 40%);
+    animation: subtleFlow 25s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* Textura de ruído muito sutil */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.015;
+    background-image: 
+      repeating-linear-gradient(0deg, hsla(160, 50%, 25%, 0.03) 0px, transparent 1px, transparent 2px, hsla(160, 50%, 25%, 0.03) 3px),
+      repeating-linear-gradient(90deg, hsla(150, 50%, 35%, 0.03) 0px, transparent 1px, transparent 2px, hsla(150, 50%, 35%, 0.03) 3px);
+    background-size: 4px 4px;
+    animation: noiseMove 12s linear infinite;
+    pointer-events: none;
+  }
+
+  .dark body::before {
+    opacity: 0.2;
+    background: 
+      radial-gradient(circle at 15% 25%, hsla(160, 50%, 35%, 0.12) 0%, transparent 40%),
+      radial-gradient(circle at 85% 75%, hsla(165, 45%, 40%, 0.08) 0%, transparent 40%);
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  @keyframes subtleFlow {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.25;
+    }
+    50% {
+      transform: translate(-2%, 2%) scale(1.03);
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes noiseMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(30px, 30px); }
   }
 }
 
 @layer components {
   .section-container {
     @apply mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32;
+    position: relative;
   }
 
   .heading-display {
     @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight;
-    text-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+    text-shadow: 
+      0 4px 40px rgba(0, 0, 0, 0.2),
+      0 2px 15px hsla(160, 50%, 35%, 0.2);
+    background: linear-gradient(135deg, 
+      hsl(0, 0%, 100%) 0%, 
+      hsl(150, 10%, 98%) 50%,
+      hsl(0, 0%, 100%) 100%
+    );
+    background-size: 200% 200%;
     background-clip: text;
     -webkit-background-clip: text;
+    animation: gentleShimmer 8s ease infinite;
+  }
+
+  @keyframes gentleShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
   .heading-section {
     @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight;
-    text-shadow: 0 2px 20px rgba(45, 95, 76, 0.1);
+    text-shadow: 0 2px 20px hsla(160, 50%, 35%, 0.15);
+    position: relative;
   }
 
   .text-body {
     @apply text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed;
   }
 
+  /* Card hover melhorado para mobile e desktop */
   .card-hover {
     @apply transition-all duration-700 ease-out cursor-pointer relative;
     transform-style: preserve-3d;
+    will-change: transform;
   }
 
   .card-hover::before {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: -1px;
     background: linear-gradient(135deg, 
-      hsla(43, 85%, 55%, 0.1) 0%, 
-      hsla(160, 50%, 35%, 0.1) 100%
+      hsla(160, 45%, 55%, 0.12) 0%, 
+      hsla(162, 50%, 50%, 0.08) 50%,
+      hsla(164, 48%, 52%, 0.06) 100%
     );
+    background-size: 200% 200%;
     opacity: 0;
     border-radius: inherit;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.6s ease;
     pointer-events: none;
+    z-index: -1;
+    animation: cardGradientFlow 10s ease infinite;
   }
 
-  .card-hover:hover::before {
-    opacity: 1;
+  @keyframes cardGradientFlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
-  .card-hover:hover {
-    @apply transform -translate-y-4 scale-[1.02];
-    box-shadow: 
-      0 25px 70px rgba(45, 95, 76, 0.2),
-      0 10px 30px rgba(234, 179, 8, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  /* Hover no desktop */
+  @media (hover: hover) {
+    .card-hover:hover::before {
+      opacity: 1;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 
+        0 20px 50px hsla(160, 50%, 45%, 0.15),
+        0 10px 25px hsla(162, 48%, 50%, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
   }
 
+  /* Ativação no mobile via intersection observer */
+  .card-hover.in-view {
+    animation: cardReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes cardReveal {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Section de contato - VERDE VIBRANTE ocupando tudo */
   .gradient-overlay {
     background: 
-      radial-gradient(circle at top right, hsla(43, 85%, 55%, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at bottom left, hsla(160, 50%, 35%, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at top right, hsla(165, 45%, 58%, 0.25) 0%, transparent 45%),
+      radial-gradient(ellipse at bottom left, hsla(160, 50%, 54%, 0.22) 0%, transparent 45%),
+      radial-gradient(ellipse at center, hsla(162, 40%, 60%, 0.18) 0%, transparent 55%),
       linear-gradient(135deg, 
-        hsla(160, 50%, 25%, 0.92) 0%, 
-        hsla(160, 50%, 35%, 0.85) 50%,
-        hsla(160, 40%, 30%, 0.88) 100%
+        hsl(162, 48%, 31%) 0%, 
+        hsl(160, 43%, 32%) 35%,
+        hsl(164, 75%, 28%) 65%,
+        hsl(161, 57%, 41%) 100%
       );
+    background-size: 140% 140%, 140% 140%, 170% 170%, 100% 100%;
+    background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%;
     position: relative;
+    animation: elegantContactFlow 20s ease-in-out infinite;
+    
+    /* FORÇANDO largura e altura total */
+    width: 100vw !important;
+    min-height: 100vh !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  @keyframes elegantContactFlow {
+    0%, 100% { 
+      background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%;
+      background-size: 140% 140%, 140% 140%, 180% 180%, 100% 100%;
+    }
+    33% {
+      background-position: 15% 10%, 85% 90%, 55% 45%, 0% 0%;
+      background-size: 145% 145%, 138% 138%, 185% 185%, 100% 100%;
+    }
+    66% {
+      background-position: 25% 20%, 75% 80%, 60% 40%, 0% 0%;
+      background-size: 135% 135%, 145% 145%, 175% 175%, 100% 100%;
+    }
   }
 
   .glass-effect {
     @apply backdrop-blur-2xl bg-white/[0.08] border border-white/20;
     box-shadow: 
       0 8px 32px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
       inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Reflexo sutil no vidro */
+  .glass-effect::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.06) 50%,
+      transparent 60%
+    );
+    animation: glassShine 12s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes glassShine {
+    0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
   }
 
   .btn-glow {
@@ -211,17 +376,29 @@ All colors MUST be HSL.
     transition: left 0.7s;
   }
 
-  .btn-glow:hover::before {
-    left: 100%;
+  @media (hover: hover) {
+    .btn-glow:hover::before {
+      left: 100%;
+    }
+  }
+
+  .btn-glow.in-view::before {
+    animation: btnGlowSweep 2s ease-in-out;
+  }
+
+  @keyframes btnGlowSweep {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
   }
 
   .floating-animation {
-    animation: floating 3s ease-in-out infinite;
+    animation: floating 4s ease-in-out infinite;
   }
 
   @keyframes floating {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    50% { transform: translateY(-15px); }
   }
 
   .parallax-slow {
@@ -229,15 +406,19 @@ All colors MUST be HSL.
   }
 
   .pulse-glow {
-    animation: pulseGlow 2s ease-in-out infinite;
+    animation: pulseGlow 4s ease-in-out infinite;
   }
 
   @keyframes pulseGlow {
     0%, 100% {
-      box-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+      box-shadow: 
+        0 0 20px hsla(234, 179, 8, 0.25),
+        0 0 35px hsla(160, 50%, 35%, 0.15);
     }
     50% {
-      box-shadow: 0 0 40px rgba(234, 179, 8, 0.6);
+      box-shadow: 
+        0 0 35px hsla(234, 179, 8, 0.4),
+        0 0 60px hsla(160, 50%, 35%, 0.25);
     }
   }
 }
@@ -278,7 +459,7 @@ All colors MUST be HSL.
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(40px) scale(0.98);
+      transform: translateY(30px) scale(0.98);
     }
     to {
       opacity: 1;
@@ -289,7 +470,7 @@ All colors MUST be HSL.
   @keyframes slideUp {
     from {
       opacity: 0;
-      transform: translateY(60px);
+      transform: translateY(50px);
     }
     to {
       opacity: 1;
@@ -300,7 +481,7 @@ All colors MUST be HSL.
   @keyframes scaleIn {
     from {
       opacity: 0;
-      transform: scale(0.9) rotate(-2deg);
+      transform: scale(0.95) rotate(-1deg);
     }
     to {
       opacity: 1;
@@ -311,7 +492,7 @@ All colors MUST be HSL.
   @keyframes slideLeft {
     from {
       opacity: 0;
-      transform: translateX(-60px);
+      transform: translateX(-50px);
     }
     to {
       opacity: 1;
@@ -322,7 +503,7 @@ All colors MUST be HSL.
   @keyframes slideRight {
     from {
       opacity: 0;
-      transform: translateX(60px);
+      transform: translateX(50px);
     }
     to {
       opacity: 1;
@@ -330,10 +511,10 @@ All colors MUST be HSL.
     }
   }
 
-  /* Scroll reveal utilities */
+  /* Scroll reveal utilities - ativa automaticamente quando visível */
   .scroll-reveal {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -342,18 +523,18 @@ All colors MUST be HSL.
     transform: translateY(0);
   }
 
-  /* Gradient text effect */
+  /* Gradient text effect mais sutil */
   .gradient-text {
     background: linear-gradient(135deg, 
-      hsl(160, 50%, 35%) 0%, 
-      hsl(43, 85%, 55%) 50%,
-      hsl(160, 50%, 25%) 100%
+      hsl(160, 50%, 30%) 0%, 
+      hsl(0, 0%, 0%) 50%,
+      hsl(160, 50%, 35%) 100%
     );
     background-size: 200% auto;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradientShift 3s ease infinite;
+    animation: gradientShift 6s ease infinite;
   }
 
   @keyframes gradientShift {
@@ -361,16 +542,33 @@ All colors MUST be HSL.
     50% { background-position: 100% 50%; }
   }
 
-  /* Enhanced hover lift */
+  /* Enhanced hover lift - funciona com in-view também */
   .hover-lift {
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .hover-lift:hover {
-    transform: translateY(-8px) scale(1.02);
+  @media (hover: hover) {
+    .hover-lift:hover {
+      transform: translateY(-6px) scale(1.01);
+    }
   }
 
-  /* Shimmer effect */
+  .hover-lift.in-view {
+    animation: liftReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes liftReveal {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Shimmer effect mais sutil */
   .shimmer {
     position: relative;
     overflow: hidden;
@@ -386,20 +584,20 @@ All colors MUST be HSL.
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.15),
       transparent
     );
-    animation: shimmer 2s infinite;
+    animation: shimmer 4s infinite;
   }
 
   @keyframes shimmer {
     to { left: 100%; }
   }
 
-  /* Zoom animation for hero image */
+  /* Zoom animation for hero image - suave */
   @keyframes zoom {
     0%, 100% { transform: scale(1.05); }
-    50% { transform: scale(1.1); }
+    50% { transform: scale(1.08); }
   }
 
   /* Scroll indicator animation */
@@ -410,17 +608,19 @@ All colors MUST be HSL.
     100% { opacity: 0; }
   }
 
-  /* Pulse animation for glow effects */
+  /* Pulse animation mais suave */
   .animate-pulse-slow {
-    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
   @keyframes pulse {
     0%, 100% {
       opacity: 1;
+      transform: scale(1);
     }
     50% {
-      opacity: .7;
+      opacity: 0.85;
+      transform: scale(1.02);
     }
   }
 }
