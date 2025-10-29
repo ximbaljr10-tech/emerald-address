@@ -43,9 +43,8 @@ const Index = () => {
           
           <div className="animate-fade-in animate-delay-200">
             <p className="text-lg sm:text-xl md:text-2xl text-primary-foreground/95 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed px-4">
-              Consultoria imobiliária humanizada no Rio de Janeiro.<br className="hidden sm:block" />
-              <span className="block sm:inline">Acompanho você do primeiro olhar até a chave na mão — </span>
-              <span className="block sm:inline">e continuo ao seu lado depois dela também.</span>
+              Consultoria imobiliária humanizada no Rio de Janeiro.{" "}
+              <span className="inline">Acompanho você do primeiro olhar até a chave na mão — e continuo ao seu lado depois dela também.</span>
             </p>
           </div>
           
@@ -412,78 +411,133 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section id="contact" className="section-container gradient-overlay text-primary-foreground relative overflow-hidden min-h-[80vh] flex items-center">
-        {/* Animated background effects */}
-        <div className="absolute inset-0 opacity-15">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent rounded-full blur-3xl animate-[floating_8s_ease-in-out_infinite]"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-glow rounded-full blur-3xl animate-[floating_10s_ease-in-out_infinite_2s]"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/5 rounded-full blur-3xl"></div>
+      {/* CTA Section - Ultra Modern 2026 Design */}
+      <section id="contact" className="cta-modern-section relative overflow-hidden">
+        {/* Advanced 3D mesh gradient background */}
+        <div className="absolute inset-0 mesh-gradient-bg"></div>
+        
+        {/* Floating organic shapes */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="floating-orb floating-orb-1"></div>
+          <div className="floating-orb floating-orb-2"></div>
+          <div className="floating-orb floating-orb-3"></div>
+          <div className="floating-orb floating-orb-4"></div>
         </div>
         
-        <div className="max-w-5xl mx-auto text-center relative z-10 px-4">
-          <div className="mb-8 sm:mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 animate-fade-in leading-tight">
-              Pronto Para Transformar<br className="hidden sm:block" /> Seu Sonho em Realidade?
+        {/* Animated grid lines */}
+        <div className="absolute inset-0 grid-overlay opacity-20"></div>
+        
+        {/* Gradient waves */}
+        <div className="absolute inset-0">
+          <svg className="absolute bottom-0 w-full h-64 opacity-30" preserveAspectRatio="none" viewBox="0 0 1440 320">
+            <path fill="url(#wave-gradient)" fillOpacity="1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+              <animate attributeName="d" dur="10s" repeatCount="indefinite"
+                values="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                M0,160L48,144C96,128,192,96,288,90.7C384,85,480,107,576,128C672,149,768,171,864,165.3C960,160,1056,128,1152,122.7C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/>
+            </path>
+            <defs>
+              <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style={{stopColor: 'rgba(255,255,255,0.1)', stopOpacity: 1}} />
+                <stop offset="50%" style={{stopColor: 'rgba(234,179,8,0.2)', stopOpacity: 1}} />
+                <stop offset="100%" style={{stopColor: 'rgba(255,255,255,0.1)', stopOpacity: 1}} />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        
+        <div className="section-container relative z-10">
+          {/* Hero text with modern typography */}
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="inline-block mb-6 px-6 py-2 rounded-full glass-tag animate-fade-in">
+              <span className="text-sm font-semibold text-white/90 tracking-wider uppercase">✨ Realize Seu Sonho</span>
+            </div>
+            
+            <h2 className="heading-cta mb-6 animate-fade-in animate-delay-100">
+              Pronto Para Transformar{" "}
+              <span className="block mt-2 gradient-text-accent">Seu Sonho em Realidade?</span>
             </h2>
-            <p className="text-base sm:text-xl md:text-2xl mb-8 sm:mb-12 text-primary-foreground/95 leading-relaxed animate-fade-in animate-delay-100 max-w-3xl mx-auto">
-              Clique abaixo e vamos conversar sobre o que você precisa e o que realmente faz sentido para você.
+            
+            <p className="text-cta-description animate-fade-in animate-delay-200">
+              Clique abaixo e vamos conversar sobre o que você precisa<br className="hidden md:block" />
+              {" "}e o que realmente faz sentido para você.
             </p>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-16 animate-fade-in animate-delay-200">
+          {/* Modern CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-5 justify-center mb-16 lg:mb-20 animate-fade-in animate-delay-300">
             <a 
               href="https://wa.me/5521999999999?text=Olá%20Thay,%20gostaria%20de%20conversar%20sobre%20imóveis"
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-white text-primary px-8 sm:px-10 py-4 sm:py-5 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-accent/60 transition-all duration-700 transform hover:scale-110 hover:-translate-y-2 inline-flex items-center justify-center btn-glow"
+              className="cta-button cta-button-primary group"
             >
-              <Send className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:rotate-12 transition-transform duration-500" />
-              Falar no WhatsApp
+              <div className="cta-button-glow"></div>
+              <Send className="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform duration-500 relative z-10" />
+              <span className="relative z-10">Falar no WhatsApp</span>
+              <div className="cta-button-shine"></div>
             </a>
+            
             <a 
               href="https://instagram.com/carvasconsultoria"
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-gradient-to-r from-accent to-accent/80 text-accent-foreground px-8 sm:px-10 py-4 sm:py-5 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-accent/60 transition-all duration-700 transform hover:scale-110 hover:-translate-y-2 inline-flex items-center justify-center btn-glow"
+              className="cta-button cta-button-secondary group"
             >
-              <Instagram className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-500" />
-              Seguir no Instagram
+              <div className="cta-button-glow"></div>
+              <Instagram className="mr-3 h-6 w-6 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-500 relative z-10" />
+              <span className="relative z-10">Seguir no Instagram</span>
+              <div className="cta-button-shine"></div>
             </a>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 text-left glass-effect rounded-2xl sm:rounded-3xl p-6 sm:p-10 animate-fade-in animate-delay-300">
-            <div className="flex items-center gap-3 sm:gap-4 group cursor-pointer p-3 sm:p-4 rounded-xl hover:bg-white/5 transition-all duration-300 sm:col-span-1">
-              <div className="p-3 rounded-xl sm:rounded-2xl bg-accent/20 group-hover:bg-accent/40 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
-                <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
+          {/* Ultra modern contact cards */}
+          <div className="max-w-6xl mx-auto animate-fade-in animate-delay-400">
+            <div className="grid md:grid-cols-3 gap-5 lg:gap-6">
+              {/* Phone Card */}
+              <div className="contact-card-modern group">
+                <div className="contact-card-inner">
+                  <div className="contact-icon-wrapper">
+                    <Phone className="h-6 w-6 text-accent" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="contact-label">Telefone</p>
+                    <a href="tel:+5521999999999" className="contact-value">
+                      (21) 99999-9999
+                    </a>
+                  </div>
+                </div>
+                <div className="contact-card-glow"></div>
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs sm:text-sm text-primary-foreground/70 mb-1">Telefone</p>
-                <a href="tel:+5521999999999" className="font-bold text-sm sm:text-lg hover:text-accent transition-colors duration-300 block truncate">
-                  (21) 99999-9999
-                </a>
+              
+              {/* Email Card */}
+              <div className="contact-card-modern group">
+                <div className="contact-card-inner">
+                  <div className="contact-icon-wrapper">
+                    <Mail className="h-6 w-6 text-accent" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="contact-label">Email</p>
+                    <a href="mailto:contato@thaycarvas.com.br" className="contact-value text-sm lg:text-base">
+                      contato@thaycarvas.com.br
+                    </a>
+                  </div>
+                </div>
+                <div className="contact-card-glow"></div>
               </div>
-            </div>
-            
-            <div className="flex items-center gap-3 sm:gap-4 group cursor-pointer p-3 sm:p-4 rounded-xl hover:bg-white/5 transition-all duration-300 sm:col-span-1">
-              <div className="p-3 rounded-xl sm:rounded-2xl bg-accent/20 group-hover:bg-accent/40 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
-                <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs sm:text-sm text-primary-foreground/70 mb-1">Email</p>
-                <a href="mailto:contato@thaycarvas.com.br" className="font-bold text-xs sm:text-sm lg:text-base hover:text-accent transition-colors duration-300 block truncate">
-                  contato@thaycarvas.com.br
-                </a>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-3 sm:gap-4 group p-3 sm:p-4 rounded-xl hover:bg-white/5 transition-all duration-300 sm:col-span-2 lg:col-span-1">
-              <div className="p-3 rounded-xl sm:rounded-2xl bg-accent/20 group-hover:bg-accent/40 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
-                <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs sm:text-sm text-primary-foreground/70 mb-1">Localização</p>
-                <p className="font-bold text-sm sm:text-lg">Rio de Janeiro, RJ</p>
+              
+              {/* Location Card */}
+              <div className="contact-card-modern group">
+                <div className="contact-card-inner">
+                  <div className="contact-icon-wrapper">
+                    <MapPin className="h-6 w-6 text-accent" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="contact-label">Localização</p>
+                    <p className="contact-value">Rio de Janeiro, RJ</p>
+                  </div>
+                </div>
+                <div className="contact-card-glow"></div>
               </div>
             </div>
           </div>
